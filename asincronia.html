@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asincronía</title>
+</head>
+<body>
+    <h1>Asincronía</h1>
+
+    <script>
+        // setTimeout(() => {
+        //     console.log(`lol`);
+        // }, 1000)
+
+        // setInterval(() => {
+        //     console.log(`relol`);
+        // }, 2000)
+
+        // setInterval(() => {
+        //     console.log(new Date().toLocaleTimeString());
+        // }, 1000)
+
+
+        // cancelar setTimeout o setInterval
+
+        // let tempSet = setTimeout(() => {
+        //     console.log(`hi`);
+        // }, 1000)
+
+        // clearTimeout(tempSet);
+
+        // let tempIn = setInterval(() => {
+        //     console.log(`hi 1`);
+        // }, 1000)
+
+        // clearInterval(tempIn);
+
+        // Código Síncrono bloqueante
+        // (() => {
+        //     console.log('Código Síncrono');
+        //     console.log('Inicio');
+        //     function dos() {
+        //         console.log('Dos');
+        //     }
+        //     function uno() {
+        //         console.log('Uno');
+        //         dos();
+        //         console.log('Tres');
+        //     }
+        //     uno()
+        //     console.log('FIN');
+        // })()
+
+        // Código Asíncrono No bloqueante
+
+        (() => {
+            console.log('Código Asíncrono');
+            console.log('Inicio');
+            function dos() {
+                setTimeout(() => {
+                    console.log('Dos');
+                }, 1000)
+            }
+            function uno() {
+                setTimeout(() => {
+                    console.log('Uno');
+                }, 0)
+                dos();
+                console.log('Tres');
+            }
+            uno();
+            console.log('Fin');
+        })()
+
+
+
+    </script>
+</body>
+</html>
