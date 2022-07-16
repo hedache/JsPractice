@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevos tipos de datos en Js</title>
+</head>
+<body>
+    <h1>Nuevos tipos de datos en javascript</h1>
+    <script>
+
+        // Symbol: es un tipo de dato privado, pora uso interno
+        // permite crear identificadores unicos de referencia
+
+        // se utiliza para crear propiedades privadas de los objs
+
+        let id = Symbol("id");
+        let id2 = Symbol("id2");
+
+        console.log(id === id2);
+        console.log(id, id2);
+        console.log(typeof id, typeof id2);
+
+        const NOMBRE = Symbol("nombre");
+        const SALUDAR = Symbol("saludar");
+
+        const persona = {
+            [NOMBRE]: 'lol',
+            edad: 54
+        }
+
+        console.log(persona);
+
+        persona.NOMBRE = 'Hedache';
+        console.log(persona);
+        console.log(persona.NOMBRE);
+        console.log(persona[NOMBRE]);
+
+        persona[SALUDAR] = function (){
+            console.log('Hola');
+        }
+
+        console.log(persona);
+        persona[SALUDAR]();
+
+        // aquí no aparece el Symbol porque es un propiedad privada
+        for(let propiedad in persona) {
+            console.log(propiedad);
+            console.log(persona[propiedad]);
+        }
+
+        // ya que en el for in no muestra los Symbol, lo puedo traer y lo muestra en []
+        console.log(Object.getOwnPropertySymbols(persona));
+
+        // Symbol sirve para crear elementos privados dentro de un obj y que sus referencias van a ser únicas
+
+
+
+
+        console.clear()
+
+        // SET no guarda datos repetidos, excepto los obj, ya que cada obj hace referencia a un obj diferente.
+        // parece ser un array, pero no
+        // set es un obj especial que se comporta como obj
+        
+        const set = new Set([1,2,3,4,5,6,7,7,7,7,7, true, false, true, {}, {}, "hola", "HOla"]);
+        console.log(set);
+        console.log(set.size);
+
+        const set2 = new Set();
+        set2.add(1);
+        set2.add(2);
+        set2.add(2);
+        set2.add(2);
+        set2.add(3);
+        set2.add(true);
+        set2.add(false);
+        set2.add(true);
+        set2.add({});
+
+        console.log(set2);
+        console.log(set2.size);
+        // console.clear();
+
+        for(l of set) {
+            console.log(l);
+        }
+
+        set2.forEach(ll => console.log(ll));
+
+        // con set no sé accede a la posición como un array, toca por así decirlo como convertirlo y ahí si
+
+        let arr = Array.from(set);
+        console.log(arr);
+
+        // set es una colección de datos únicos
+        set.delete("HOla")
+
+
+        // comprueba si el valor existe en la colección de datos, retorna true o false.
+        console.log(set.has("hola"));
+
+        // limpiar un set
+        set.clear();
+        console.log(set);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
