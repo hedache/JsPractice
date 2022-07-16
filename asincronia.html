@@ -55,24 +55,176 @@
 
         // Código Asíncrono No bloqueante
 
-        (() => {
-            console.log('Código Asíncrono');
-            console.log('Inicio');
-            function dos() {
-                setTimeout(() => {
-                    console.log('Dos');
-                }, 1000)
+        // (() => {
+        //     console.log('Código Asíncrono');
+        //     console.log('Inicio');
+        //     function dos() {
+        //         setTimeout(() => {
+        //             console.log('Dos');
+        //         }, 1000)
+        //     }
+        //     function uno() {
+        //         setTimeout(() => {
+        //             console.log('Uno');
+        //         }, 0)
+        //         dos();
+        //         console.log('Tres');
+        //     }
+        //     uno();
+        //     console.log('Fin');
+        // })()
+
+
+        // callbacks: llamada de vuelta, es una función q se va a ejecutar después de q otra lo haga
+
+        // function cuadradoCallback(value, callback) {
+        //     setTimeout(() => {
+        //         callback(value, value * value, 'hola')
+        //     }, 0 | Math.random() * 1000)
+        // }
+
+        // cuadradoCallback(0, (value, result, h) => {
+        //     console.log('Inicia Callback');
+        //     console.log(`Callback ${value}, ${result}, ${h}`);
+        //     cuadradoCallback(1, (value, result, h) => {
+        //         console.log(`Callback ${value}, ${result}, ${h}`);
+        //         cuadradoCallback(2, (value, result, h) => {
+        //             console.log(`Callback ${value}, ${result}, ${h}`);
+        //             cuadradoCallback(3, (value, result, h) => {
+        //                 console.log(`Callback ${value}, ${result}, ${h}`);
+        //                 cuadradoCallback(4, (value, result, h) => {
+        //                     console.log(`Callback ${value}, ${result}, ${h}`);
+        //                     cuadradoCallback(5, (value, result, h) => {
+        //                         console.log(`Callback ${value}, ${result}, ${h}`);
+        //                     })
+        //                 })
+        //             })
+        //         })
+        //     })
+        // }) 
+
+        // console.log('q cosas');
+
+        // function cuadradoCallback(value) {
+
+        //     if(typeof value !== 'number') return Promise.reject(`Error, el valor: ${value} ingresado no es un número`);
+
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             resolve({
+        //                 value,
+        //                 result: value * value
+        //             });
+        //         }, 0 | Math.random() * 1000)
+        //     })
+
+        // }
+
+        // cuadradoCallback(0)
+        // .then((obj) => {
+        //     console.log('Inicia promesa');
+        //     console.log(`Promise: ${obj.value}, ${obj.result}`);
+        //     return cuadradoCallback(1);
+        // })
+        // .then(obj => {
+        //     console.log(`Promise: ${obj.value}, ${obj.result}`);
+        //     return cuadradoCallback(2);
+        // })
+        // .then(obj => {
+        //     console.log(`Promise: ${obj.value}, ${obj.result}`);
+        //     return cuadradoCallback(3);
+        // })
+        // .then(obj => {
+        //     console.log(`Promise: ${obj.value}, ${obj.result}`);
+        //     return cuadradoCallback(4);
+        // })
+        // .then(obj => {
+        //     console.log(`Promise: ${obj.value}, ${obj.result}`);
+        //     return cuadradoCallback('p');
+        // })
+        // .then(obj => {
+        //     console.log(`Promise: ${obj.value}, ${obj.result}`);
+        //     console.log('Fin de la promesa');
+        // })
+        // .cath(err => console.error(err));
+
+        function cuadradoPromise(value) {
+
+        if(typeof value !== 'number') return Promise.reject(`Error, el valor: ${value} ingresado no es un número`);
+
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({
+                    value,
+                    result: value * value
+                });
+            }, 0 | Math.random() * 1000)
+        })
+
+        }
+
+        async function funcionAsincronaDeclarada() {
+            try {
+                console.log('Inicio Async Function');
+
+                let obj = await cuadradoPromise(0);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(1);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(2);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(3);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(4);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+                
+                obj = await cuadradoPromise(5);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                console.log('Fin Async Function');
+            } catch(err) {
+                console.error(err);
             }
-            function uno() {
-                setTimeout(() => {
-                    console.log('Uno');
-                }, 0)
-                dos();
-                console.log('Tres');
+        }
+
+
+        const funcionAsincronaExpresada = async () => {
+            try {
+                console.log('Inicio Async Function');
+
+                let obj = await cuadradoPromise(6);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(7);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(8);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(9);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                obj = await cuadradoPromise(10);
+                console.log(`Async Function: ${obj.value} ${obj.result}`);
+
+                console.log('Fin Async Function');
+            } catch(err) {
+                console.error(err);
             }
-            uno();
-            console.log('Fin');
-        })()
+        }
+
+
+
+
+        funcionAsincronaDeclarada();
+        funcionAsincronaExpresada();
+
+
+
 
 
 
