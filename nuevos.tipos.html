@@ -105,6 +105,145 @@
         set.clear();
         console.log(set);
 
+        console.clear();
+
+        // MAP: son obj que nos sirven para almacenar conjuntos de valores asociados a manera de obj, es muy parecido a un obj primitivo
+        // Es un obj iterador
+        // el map trabaja muy similar a los set y get
+
+        let mapa = new Map();
+        mapa.set('nombre', 'hedache');
+        mapa.set('apellido', 'Mircha');
+        mapa.set('edad', 20);
+
+        console.log(mapa);
+        console.log(mapa.size);
+
+        // comprobar si existe una llave
+        console.log(mapa.has('correo'));
+        console.log(mapa.has('nombre'));
+        console.log(mapa.get('nombre'));
+        mapa.set('nombre', 'Hedache lol')
+        console.log(mapa);
+        console.log(mapa.get('nombre'));
+        mapa.delete('apellido');
+
+
+        mapa.set(19, 'diecinueve');
+        mapa.set(false, 'falso');
+        mapa.set({}, {})
+
+
+        console.log(mapa);
+
+        // destructuración
+
+        for(let [key, value] of mapa) {
+            console.log(`La llave: ${key}, Valor: ${value}`);
+        }
+
+        const mapa2 = new Map([
+            ['nombre', 'lol'],
+            ['edad', 7],
+            ['animal', 'perro'],
+            [null, 'nulo']
+        ])
+
+        console.log(mapa2);
+        
+
+        const llavesMapa2 = [...mapa2.keys()];
+        const valoresMapa2 = [...mapa2.keys()];
+
+        console.log(llavesMapa2);
+        console.log(valoresMapa2);
+
+
+        console.clear();
+
+
+        // WEAKSETS y WEAKMAPS: mapas débiles y conjuntos débiles
+        // solo pueden almacenar referencias débiles
+
+        const ws = new WeakSet();
+
+        let valor1 = {'valor1': 1}
+        let valor2 = {'valor2': 2}
+        let valor3 = {'valor3': 3}
+
+        ws.add(valor1);
+        ws.add(valor2);
+        console.log(ws);
+
+        console.log(ws.has(valor1));
+        console.log(ws.has(valor3));
+
+        ws.delete(valor2);
+        console.log(ws);
+
+        ws.add(valor2);
+        ws.add(valor3);
+        console.log(ws);
+
+        // setInterval(() => console.log(ws), 1000);
+
+        // setTimeout(() => {
+        //     valor1 = null;
+        //     valor2 = null;
+        //     valor3 = null;
+        // }, 5000)
+
+
+        console.clear();
+
+        const wm = new WeakMap();
+        let llave1 = {};
+        let llave2 = {};
+        let llave3 = {};
+
+        wm.set(llave1, 1)
+        wm.set(llave2, 2)
+        // wm.set(llave3, 3)
+        console.log(wm);
+
+        console.log(wm.has(llave1));
+        console.log(wm.has(llave3));
+
+        console.log(wm.get(llave1));
+        console.log(wm.get(llave2));
+        console.log(wm.get(llave3));
+
+        wm.delete(llave2)
+        console.log(wm);
+
+        wm.set(llave2, 3);
+        wm.set(llave3, 3);
+        console.log(wm);
+
+        // cuando se nulifican las referencias de wm ws, se van a eliminar automáticamente, y esto mejora el rendimiento de nuestra aplicación
+
+        // variables de estado si las he declarao en vue, react, angular y quiero manejar aquí en vanilla js, sería de la sgt manera
+        // obj -> wm
+        // [] -> ws
+
+        setInterval(() => console.log(wm), 1000);
+
+        setTimeout(() => {
+            llave1 = null;
+            llave2 = null;
+            llave3 = null;
+        }, 5000)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
