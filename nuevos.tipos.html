@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevos tipos de datos en Js</title>
-</head>
-<body>
-    <h1>Nuevos tipos de datos en javascript</h1>
-    <script>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nuevos tipos de datos en Js</title>
+    </head>
+    <body>
+        <h1>Nuevos tipos de datos en javascript</h1>
+        <script>
 
         // Symbol: es un tipo de dato privado, pora uso interno
         // permite crear identificadores unicos de referencia
@@ -226,17 +226,153 @@
         // obj -> wm
         // [] -> ws
 
-        setInterval(() => console.log(wm), 1000);
+        // setInterval(() => console.log(wm), 1000);
 
-        setTimeout(() => {
-            llave1 = null;
-            llave2 = null;
-            llave3 = null;
-        }, 5000)
+        // setTimeout(() => {
+        //     console.log('hola');
+        //     llave1 = null;
+        //     llave2 = null;
+        //     llave3 = null;
+        // }, 5000)
+
+        console.clear();
+
+
+        // ITERABLES & ITERATORS
+
+        // const iterable = [1,2,3,4,5]
+        // const iterable = "Hola mundo"
+        // const iterable = new Set([1,2,3,4,5]);
+        const iterable = new Map([["nombre", "lol"], ["edad", 11]]);
+        
+
+        // Accedemos al iterados del iterable
+        const iterador = iterable[Symbol.iterator]();
+
+        console.log(iterable);
+        console.log(iterador);
+        // console.log(iterador.next());
+        // console.log(iterador.next());
+        // console.log(iterador.next());
+        // console.log(iterador.next());
+        // console.log(iterador.next());
+        // console.log(iterador.next());
+
+        let next = iterador.next();
+
+        while(!next.done){
+            console.log(next.value);
+            next = iterador.next();
+        }
+
+
+        console.clear();
+
+        // GENERATORS
+
+        // el * le indica a js que es un generador
+        // el yield cumple la función de  un return en un generador
+        function* iterable2() {
+            yield "hola";
+            console.log('Hola Consola');
+            yield 'hola 2';
+            console.log('seguimos con mas instrucciones de nuestro código');
+            yield 'hola 3';
+            yield 'hola 4';
+        }
+
+
+        let iteradoss = iterable2();
+        // console.log(iteradoss.next());
+        // console.log(iteradoss.next());
+        // console.log(iteradoss.next());
+        // console.log(iteradoss.next());
+
+        for(y of iteradoss){
+            console.log(y);
+            console.log('*******');
+        }
+
+        const arr22 = [...    iterable2()]
+        console.log(arr22);
+
+        const lo = [1,2,3,3,3,3,4,5,6,7,]
+        console.log('lo', lo);
+        console.log([...new Set(lo)]);
+
+        function square(valor){
+            setTimeout(() => {
+                return console.log({valor, result: valor * valor});
+            }, Math.random() * 1000)
+
+
+            // return {
+            //     valor,
+            //     result: valor * valor
+            // }
+        }
+
+        function* generador() {
+            console.log('Inicia generados');
+            yield square(0);
+            yield square(1);
+            yield square(2);
+            yield square(3);
+            yield square(4);
+            yield square(5);
+            console.log('Fin generados');
+        }
+
+        let gen = generador();
+
+        // for(let r of gen){
+        //     console.log(r);
+        // }
+
+
+        console.clear();
+
+        // PROXIES: hace una vínculación entre el objeto original y el obj copia, y con su handler 
+        // podemos hacer validaciones antes de su asignación
+
+        
+        const persona3 = {
+            nombre: '',
+            apellido: '',
+            edad: 0
+        }
+
+        const manejador = {
+            set(obj, prop, valor) {
+
+                if(Object.keys(obj).indexOf(prop) === -1 ) {
+                    return console.error(`La propiedad "${prop}" no existe en el objeto persona`);
+                }
+
+                if (
+                    (prop === 'nombre' || prop === 'apellido') && !(/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/g.test(valor))
+                ) {
+                    return console.error(`La propiedad "${prop}" solo acepta letras y espacios en blanco`)
+                }
 
 
 
 
+
+
+
+                obj[prop] = valor;
+            }
+        }
+
+        const jon = new Proxy(persona3, manejador);
+        jon.nombre = 'hedache 11';
+        jon.apellido = 'lol';
+        jon.edad = 77;
+        jon.twitter = '@hedache';
+
+        console.log(jon);
+        console.log(persona3);
 
 
 
@@ -262,5 +398,5 @@
 
 
     </script>
-</body>
+    </body>
 </html>
